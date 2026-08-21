@@ -8,7 +8,7 @@ body {
 
 /* ---------- A4 print-ready QR card grid (preserved from qr.html) ---------- */
 .qr-cards-grid {
-  width: 95mm;
+  width: 100mm;
   height: 50mm;
   margin: 0 auto;
 }

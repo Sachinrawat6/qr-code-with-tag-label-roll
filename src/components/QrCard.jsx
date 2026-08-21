@@ -16,6 +16,23 @@ const SIZE_TO_AVG_KEY = {
   '5XL': 'average_4xl_5xl',
 };
 
+// const formatDate = (raw) => {
+//   if (!raw) return '';
+//   const d = new Date(raw);
+//   if (Number.isNaN(d.getTime())) return raw;
+
+//   const day = String(d.getDate()).padStart(2, '0');
+//   const month = String(d.getMonth() + 1).padStart(2, '0');
+//   const year = String(d.getFullYear()).slice(-2);
+//   const time = d.toLocaleTimeString('en-US', {
+//     hour: '2-digit',
+//     minute: '2-digit',
+//     second: '2-digit',
+//     hour12: true,
+//   });
+
+//   return `${day}-${month}-${year}, ${time}`;
+// };
 const formatDate = (raw) => {
   if (!raw) return '';
   const d = new Date(raw);
@@ -24,16 +41,18 @@ const formatDate = (raw) => {
   const day = String(d.getDate()).padStart(2, '0');
   const month = String(d.getMonth() + 1).padStart(2, '0');
   const year = String(d.getFullYear()).slice(-2);
-  const time = d.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true,
-  });
+
+  // Time without leading zero for hours
+  let hours = d.getHours();
+  const minutes = String(d.getMinutes()).padStart(2, '0');
+  const seconds = String(d.getSeconds()).padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12; // Convert to 12-hour format, keep 12 as is
+
+  const time = `${hours}:${minutes}:${seconds} ${ampm}`;
 
   return `${day}-${month}-${year}, ${time}`;
 };
-
 const getAverage = (avgFabric, size) => {
   if (!avgFabric) return '';
   const key = SIZE_TO_AVG_KEY[size];
@@ -50,7 +69,7 @@ const QrCard = ({ product, fabricDetails }) => {
     <div className="qr-card ">
       <div className="details font-[Poppins]">
         <div className=" gap-0.5 relative">
-          <span>
+          <span className="font-extrabold text-[11px]">
             {' '}
             {product['Channel'] || ''} :{formatDate(product['Date'])}{' '}
           </span>
@@ -58,9 +77,31 @@ const QrCard = ({ product, fabricDetails }) => {
             {' '}
             {product['Style Number'] || ''}-{product['Size'] || ''}
           </span>
-          <span className="absolute -right-7 top-1">
+          <span className="absolute text-[13px] top-0.5">
             {' '}
             {product['Style 1'] ? `(${product['Style 1']})` : ''}
+          </span>
+          <span
+            className="flex items-center justify-center  "
+            style={{
+              position: 'absolute',
+              right: '-80px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              lineHeight: '1.2',
+              textTransform: 'uppercase',
+              textAlign: 'center',
+            }}
+          >
+            {(() => {
+              const channelCode = product['Channel']?.slice(0, 2) || '';
+              const dateObj = new Date(product['Date']);
+              const hours = dateObj.getHours();
+              const suffix = hours >= 12 ? '(B)' : '(M)';
+              return `${channelCode}${suffix}`;
+            })()}
           </span>
           <span>{product['Style 2'] || ''} </span>
         </div>
@@ -115,7 +156,7 @@ const QrCard = ({ product, fabricDetails }) => {
                 e.currentTarget.style.visibility = 'hidden';
               }}
             />
-            <span className="text-[13px] text-center">{orderId}</span>
+            <span className="text-[13px] text-center ">{orderId}</span>
           </>
         ) : (
           <div style={{ fontSize: 10, color: '#999' }}>No Order ID</div>
