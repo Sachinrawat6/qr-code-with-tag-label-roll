@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+body {
+  margin: 0;
+  background-color: #f8f9fa;
+  color: #2b2d42;
+}
+
+/* ---------- A4 print-ready QR card grid (preserved from qr.html) ---------- */
+.qr-cards-grid {
+  width: 95mm;
+  height: 50mm;
+  margin: 0 auto;
+}
+
+.qr-card {
+  border: 2px dotted #ccc;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 5px 0;
+  padding-left: 12px;
+  padding-right: 12px; /* Added */
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-align: left;
+  page-break-inside: avoid;
+  background: #fff;
+  min-height: 180px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.qr-card .details {
+  margin-bottom: 2px;
+  flex: 1;
+}
+
+.qr-card .details > div {
+  align-items: center;
+}
+
+.qr-card .qr-section {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  top: 17mm;
+  right: 2mm;
+  flex-shrink: 0; /* Added - prevents QR from shrinking */
+}
+.qr-card .qr-section img {
+  width: 80px;
+  height: 80px;
+}
+
+.qr-card .bold {
+  font-weight: bold;
+}
+
+/* ---------- Loader bar ---------- */
+.qr-loader {
+  width: 100%;
+  height: 5px;
+  background: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.qr-loader::after {
+  content: '';
+  position: absolute;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, #3498db, #85c1e9);
+  animation: qr-loading 1s infinite;
+}
+
+@keyframes qr-loading {
+  0% {
+    left: -40%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* ---------- Print rules ---------- */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    margin: 0;
+    background: #fff;
+  }
+  .qr-cards-grid {
+    /* grid-template-columns: repeat(3, 1fr); */
+    grid-template-columns: 1fr;
+    gap: 1mm;
+  }
+  .qr-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

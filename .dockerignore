@@ -1,0 +1,28 @@
+.git
+.github
+.gitignore
+.dockerignore
+qurvii.json
+README.md
+
+# Node / build artifacts — must be ignored so the build stage does a clean install
+node_modules
+dist
+.vite
+
+# Editor / OS noise
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+# Local env files (never bake secrets into images)
+.env
+.env.*
+
+# Legacy standalone HTML files no longer used by the React app
+qr.html
+api.js
+
+# Local helper scripts
+check-syntax.mjs
