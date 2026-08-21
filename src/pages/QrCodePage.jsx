@@ -77,7 +77,7 @@ const QrCodePage = () => {
     setExportProgress({ current: 0, total });
 
     try {
-      const PAGE_W = 100; // mm
+      const PAGE_W = 90; // mm
       const PAGE_H = 50; // mm
       const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: [PAGE_W, PAGE_H] });
 

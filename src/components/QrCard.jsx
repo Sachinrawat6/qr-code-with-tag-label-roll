@@ -69,7 +69,7 @@ const QrCard = ({ product, fabricDetails }) => {
     <div className="qr-card ">
       <div className="details font-[Poppins]">
         <div className=" gap-0.5 relative">
-          <span className="font-extrabold text-[11px]">
+          <span className="font-extrabold ">
             {' '}
             {product['Channel'] || ''} :{formatDate(product['Date'])}{' '}
           </span>
