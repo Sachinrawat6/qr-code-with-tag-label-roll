@@ -77,7 +77,7 @@ const QrCard = ({ product, fabricDetails }) => {
             {' '}
             {product['Style Number'] || ''}-{product['Size'] || ''}
           </span>
-          <span className="absolute text-[13px] top-0.5">
+          <span className="absolute text-[13px] top-6 -right-20">
             {' '}
             {product['Style 1'] ? `(${product['Style 1']})` : ''}
           </span>
