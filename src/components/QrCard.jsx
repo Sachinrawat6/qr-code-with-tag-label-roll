@@ -133,7 +133,7 @@ const QrCard = ({ product, fabricDetails }) => {
         })}
 
         <div>
-          <span className="bold">Accessory 1:</span> {product['Accessory 1'] || ''}
+          <span className="bold">Acc:</span> {product['Accessory 1'] || ''}
           {product['Accessory 2'] ? ` | ${product['Accessory 2']}` : ''}
         </div>
 
@@ -143,7 +143,7 @@ const QrCard = ({ product, fabricDetails }) => {
         </div>
       </div>
 
-      <div className="qr-section pb-2">
+      <div className="qr-section pb-2 ">
         {orderId ? (
           <>
             <img

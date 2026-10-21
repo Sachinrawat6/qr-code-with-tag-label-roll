@@ -43,8 +43,8 @@ body {
   width: 80px;
   height: 80px;
   position: relative;
-  top: 17mm;
-  right: 2mm;
+  top: 10mm;
+  right: 0mm;
   flex-shrink: 0; /* Added - prevents QR from shrinking */
 }
 .qr-card .qr-section img {
